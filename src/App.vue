@@ -1,30 +1,39 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <a-layout style="min-height: 100vh">
+    <Header style="position: sticky; top: 0; z-index: 10" />
+    <a-layout-content
+      style="display: flex; justify-content: center; margin: 10px 0"
+    >
+      <router-view />
+    </a-layout-content>
+    <Footer style="position: sticky; bottom: 0" />
+  </a-layout>
 </template>
 
+<script lang="ts">
+import { defineComponent, provide, reactive } from "vue";
+import Header from "@/components/core/header.vue";
+import Footer from "@/components/core/footer.vue";
+
+export default defineComponent({
+  components: {
+    Header,
+    Footer,
+  },
+  setup() {
+    const user = reactive({
+      name: "Карбышев Олег Сергеевич",
+      filial: 4,
+      salesChannel: 2,
+    });
+
+    provide("user", user);
+  },
+});
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.ant-layout-footer {
+  padding: 5px 50px !important;
 }
 </style>
