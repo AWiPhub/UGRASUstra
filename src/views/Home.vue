@@ -505,13 +505,19 @@ export default defineComponent({
           break;
       }
 
-      return Math.round(
-        Number(formStateInsObject.sum) *
-          filialCoef *
-          objectCoef *
-          riskCoef *
-          0.1
-      );
+      if (riskCoef) {
+        return Math.round(
+          Number(formStateInsObject.sum) *
+            filialCoef *
+            objectCoef *
+            riskCoef *
+            0.1
+        );
+      } else {
+        return Math.round(
+          Number(formStateInsObject.sum) * filialCoef * objectCoef * 0.1
+        );
+      }
     };
 
     const changeObject = function () {
